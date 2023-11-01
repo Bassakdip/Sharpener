@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud Application</title>
+</head>
+
+<body>
+    <form>
+        Choose Expense amount : <input type="text" id="amount" name="amount">
+        Choose Description : <input type="text" id="description" name="description">
+        Choose a Category : <input type="text" id="catagory" name="catagory">
+        <input type="button" value="Submit" id="btn" onclick="Submit()">
+        <input type="reset" value="Clear">
+    </form>
+    <br>
+    <div id="msg"></div><br>
+    <table border="2" id="table">
+        <tr>
+            <td class="col">Expense amount</td>
+            <td class="col">Description</td>
+            <td class="col">Category</td>
+            <td class="col">Action</td>
+        </tr>
+    </table>
+</body>
+<script src="Sharpner_crudApp.js"></script>
+
+</html>
