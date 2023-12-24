@@ -4,28 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Application</title>
+    <title>New Crud Application</title>
 </head>
+<style>
+</style>
 
 <body>
-    <form>
-        Choose Expense amount : <input type="text" id="amount" name="amount">
-        Choose Description : <input type="text" id="description" name="description">
-        Choose a Category : <input type="text" id="catagory" name="catagory">
-        <input type="button" value="Submit" id="btn" onclick="Submit()">
-        <input type="reset" value="Clear">
+    <form onsubmit="onFormSubmit()">
+        <div>
+            <label for="ExpenseAmount">Choose Expense amount :-</label>
+            <input type="text" name="ExpenseAmount" id="ExpenseAmount">
+        </div>
+        <div>
+            <label for="Description">Choose Description :-</label>
+            <input type="text" name="Description" id="Description">
+        </div>
+        <div>
+            <label for="Category">Choose a Category :-</label>
+            <input type="text" name="Category" id="Category">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
     </form>
     <br>
-    <div id="msg"></div><br>
-    <table border="2" id="table">
-        <tr>
-            <td class="col">Expense amount</td>
-            <td class="col">Description</td>
-            <td class="col">Category</td>
-            <td class="col">Action</td>
-        </tr>
-    </table>
+    <td>
+        <table border="2" id="listData">
+            <thead>
+                <tr>
+                    <th>Expense amount</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </td>
+    <script src="Crud_App2.js"></script>
 </body>
-<script src="Sharpner_crudApp.js"></script>
 
 </html>
