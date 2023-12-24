@@ -1,72 +1,65 @@
-//crud- creat,read,update,delete
-
-//Global variabeles
 var row = null;
-function Submit() {
-    var dataEntered = Data();
-    var readData = dataFromLocalStorage(dataEntered);
-    if(row == null){
-        insert(readData);
-        msg.innerHTML="Data insert";
+function onFormSubmit(){
+    event.preventDefault();
+    var formData = readData();
+    if(row === null)
+    {
+        insertNewData(formData);
     }
     else{
-        update();
-        msg.innerHTML="Data Update";
+        updateData(formData)
     }
+    resetForm();
+}
+
+//retrive the data
+function readData(){
+    var formData = {};
+    formData["ExpenseAmount"] = document.getElementById("ExpenseAmount").value;
+    formData["Description"] = document.getElementById("Description").value;
+    formData["Category"] = document.getElementById("Category").value;
     
+    return formData;
 }
 
-//Creat data from form
-function Data() {
-    var Expencesamount = document.getElementById("amount").value;
-    var Description = document.getElementById("description").value;
-    var catagory = document.getElementById("catagory").value;
-
-    var arr = [Expencesamount, Description, catagory]
-    return arr;
-}
-
-//Data in local Storage
-function dataFromLocalStorage(dataEntered) {
-    var e = localStorage.setItem("amount", dataEntered[0]);
-    var d = localStorage.setItem("description", dataEntered[1]);
-    var c = localStorage.setItem("catagory", dataEntered[2]);
-
-    //getting values from local to tabel
-
-    var e1 = localStorage.getItem("amount", e);
-    var d1 = localStorage.getItem("description", d);
-    var c1 = localStorage.getItem("catagory", c);
-
-    var arr = [e1, d1, c1]
-    return arr;
-}
-
-//insert
-function insert(readData) {
-    var row = table.insertRow();
-    row.insertCell(0).innerHTML = readData[0];
-    row.insertCell(1).innerHTML = readData[1];
-    row.insertCell(2).innerHTML = readData[2];
-    row.insertCell(3).innerHTML = "<button onclick = edit(this)>Edit</button><button onclick = remove(this)>Delete</button>"
+//Insert the Data
+function insertNewData(data){
+    var table = document.getElementById("listData").getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.length);
+    var cell1 = newRow.insertCell(0);
+        cell1.innerHTML = data.ExpenseAmount;
+    var cell2 = newRow.insertCell(1);
+        cell2.innerHTML = data.Description;
+    var cell3 = newRow.insertCell(2);
+        cell3.innerHTML = data.Category;
+    var cell4 = newRow.insertCell(3);
+        cell4.innerHTML = `<button onclick='onEdit(this)'>Edit</button> <button onclick='onDelete(this)'>Delete</button>`
 }
 //edit
-function edit(td) {
-    row = td.parentElement.parentElement;
-    document.getElementById("amount").value = row.Cells[0].innerHTML;
-    document.getElementById("description").value = row.Cells[1].innerHTML;
-    document.getElementById("catagory").value = row.Cells[2].innerHTML;
-}
-//update
-function update() {
-    row.Cells[0].innerHTML = document.getElementById("amount").value;
-    row.Cells[1].innerHTML = document.getElementById("description").value;
-    row.Cells[2].innerHTML = document.getElementById("catagory").value;
+function onEdit(td){
+    row=td.parentElement.parentElement;
+    document.getElementById('ExpenseAmount').value = row.cells[0].innerHTML;
+    document.getElementById('Description').value = row.cells[1].innerHTML;
+    document.getElementById('Category').value = row.cells[2].innerHTML;
 
-    row = null;
 }
-//delete
-function remove(td){
-    row = td.parentElement.parentElement;
-    document.getElementById("table").deleteRow(row.rowIndex)
+function updateData(formData){
+    row.cells[0].innerHTML=formData.ExpenseAmount;
+    row.cells[1].innerHTML=formData.Description;
+    row.cells[2].innerHTML=formData.Category;
+
+}
+// delete
+function onDelete(td){
+    if(confirm("Do you want to delete?")){
+        row=td.parentElement.parentElement;
+        document.getElementById('listData').deleteRow(row.rowIndex);
+    }
+    resetForm()
+}
+//Reset the data
+function resetForm(){
+    document.getElementById('ExpenseAmount').value = " ";
+    document.getElementById('Description').value = " ";
+    document.getElementById('Category').value = " ";
 }
